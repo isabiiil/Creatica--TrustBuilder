@@ -4,5 +4,11 @@
   "dependencies": {
     "async": "^3.2.0",
     "pg": "^8.5.1"
+  },
+  "scripts": {
+    "start": "nodemon server/server.js -e ejs,js,css,html,jpg,png,scss"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
