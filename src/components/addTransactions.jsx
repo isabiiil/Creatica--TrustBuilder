@@ -1,4 +1,5 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext} from 'react';
+import "../App.css";
 import { GlobalContext } from '../context/GlobalState';
 
 export const AddTransaction = () => {
@@ -9,7 +10,7 @@ export const AddTransaction = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-
+    console.log("yeet")
     const newTransaction = {
       id: Math.floor(Math.random() * 100000000),
       text,
@@ -17,23 +18,9 @@ export const AddTransaction = () => {
     }
 
     addTransaction(newTransaction);
+    console.log("done")
   }
-//   const realFileBtn= document.getElementById("real-file");
-//   const customBtn= document.getElementById("custom-button");
-//   const customTxt= document.getElementById("custom-text");
-  
-//   customBtn.addEventListener("click", function(){
-//     realFileBtn.click();
-//   });
 
-//   realFileBtn.addEventListener("change", function(){
-//     if (realFileBtn.value){
-//       customTxt.innerHTML=realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
-//     } else{
-//       customTxt.innerHTML="No file chosen, yet.";
-//     }
-  
-//   });
   return (
     <>
       <h3>Add new transaction</h3>
@@ -44,13 +31,14 @@ export const AddTransaction = () => {
         </div>
         <div className="form-control">
           <label htmlFor="amount"
-            >yeet <br />
+            >Amount <br />
             (negative - expense, positive - income)</label
           >
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
         </div>
         <button className="btn">Add transaction</button>
       </form>
+      {console.log(GlobalContext)}
     </>
   )
 }
