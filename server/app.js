@@ -15,6 +15,16 @@ const days_to_ms = d => d * 24 * 60 * 60 * 1000;
 
 const app = express();
 
+// dummy data: todo: replace w cockroachdb
+const data = {
+    1: [
+        {type: "revenue", amount: 300},
+        {type: "expense", amount: 200},
+        {}
+    ]
+}
+
+
 app.use(
     cookieSession({
         maxAge: days_to_ms(30),
@@ -23,6 +33,12 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3003/"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // .use(express.static(path.join(__dirname, 'public')))
 // .set('views', path.join(__dirname, 'views'))
@@ -37,6 +53,10 @@ app.get('/api/current_user', (req, res) => {
 app.get('/api/logout', (req, res) => {
     req.logout();  // kills cookie ID
     res.send(req.user);  // should be undefined
+})
+
+app.get('/api/data', (req, res) => {
+    res.send()
 })
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
