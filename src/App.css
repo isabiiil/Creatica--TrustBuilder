@@ -25,8 +25,8 @@ body {
 }
 
 .container {
-  margin: 30px auto;
-  width: 350px;
+  width: 25vw;
+  margin: 5vh auto;
 }
 
 h1 {
@@ -51,7 +51,7 @@ h4 {
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
+  margin: 5vh auto;
 }
 
 .inc-exp-container > div {
@@ -155,8 +155,8 @@ input[type='number'] {
   opacity: 1;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 768px) {
   .container {
-    width: 300px;
+    width: 60vw;
   }
 }

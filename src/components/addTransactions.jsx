@@ -22,7 +22,7 @@ export const AddTransaction = () => {
   }
 
   return (
-    <>
+    <div className="container">
       <h3>Add new transaction</h3>
       <form onSubmit={onSubmit}>
         <div className="form-control">
@@ -39,6 +39,6 @@ export const AddTransaction = () => {
         <button className="btn">Add transaction</button>
       </form>
       {console.log(GlobalContext)}
-    </>
+    </div>
   )
 }

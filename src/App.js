@@ -8,6 +8,8 @@ import {
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import OrgCard from "./components/OrganizationCard";
+import { Balance } from "./components/Balance"
+import { IncomeExpenses } from "./components/IncomeExpenses"
 import { TransactionList } from "./components/TransactionList";
 import { AddTransaction } from "./components/AddTransactions";
 import { GlobalProvider } from "./context/GlobalState"
@@ -22,6 +24,8 @@ export default function App() {
           <Route path="/history">
             <Navbar />
             <GlobalProvider>
+              <Balance />
+              <IncomeExpenses />
               <TransactionList />
             </GlobalProvider>
           </Route>
