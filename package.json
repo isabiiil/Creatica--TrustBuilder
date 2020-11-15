@@ -14,7 +14,8 @@
     "node": "14.15.0"
   },
   "scripts": {
-    "start": "nodemon server/app.js -e ejs,js,css,html,jpg,png,scss"
+    "dev": "nodemon server/app.js -e ejs,js,css,html,jpg,png,scss",
+    "start": "node server/app.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
