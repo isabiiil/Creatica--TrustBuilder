@@ -20,7 +20,7 @@ const data = {
     1: [
         {type: "revenue", amount: 300},
         {type: "expense", amount: 200},
-        {}
+        {type: "revenue", amount: 400}
     ]
 }
 
@@ -56,7 +56,7 @@ app.get('/api/logout', (req, res) => {
 })
 
 app.get('/api/data', (req, res) => {
-    res.send()
+    res.send({history: data[1]});
 })
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
