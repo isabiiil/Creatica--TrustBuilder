@@ -3,7 +3,7 @@ var Component = React.Component;
 var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-class PieChart extends Component {
+export default class PieChart extends Component {
 	render() {
 		const options = {
 			theme: "dark2",
@@ -40,4 +40,3 @@ class PieChart extends Component {
 		);
 	}
 }
-module.exports = PieChart;

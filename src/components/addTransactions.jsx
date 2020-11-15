@@ -3,7 +3,8 @@ import "../App.css";
 import { GlobalContext } from '../context/GlobalState';
 
 export const AddTransaction = () => {
-  const [text, setText] = useState('');
+  const [type, setType] = useState('');
+  const [tags, setTags] = useState({});
   const [amount, setAmount] = useState(0);
   const [image, setImage]=useState('');
 
@@ -11,54 +12,53 @@ export const AddTransaction = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log("yeet")
     const newTransaction = {
       id: Math.floor(Math.random() * 100000000),
-      text,
+      tags,
       image,
       amount: +amount
     }
 
     addTransaction(newTransaction);
-    console.log("done")
   }
+  const types = ['', 'Donation', 'Expenditure']
+  const dropdownChoicesOrg = ['', 'Project A', 'Project B', 'Project C', 'Initiative D', 'Company E', 'Company F', 'Unrelated Purchase (!!)']
+  const dropdownChoicesDonor = ['', 'One-time Donation', 'Continuous Sponsorship']
 
   return (
     <div className="container">
       <h3>Add new transaction</h3>
       <form onSubmit={onSubmit}>
-        
         <div className="form-control">
-          <label htmlFor="text">
-              <h5>Transaction Name</h5> <br/>
-              Ex) Donation to _____
-          </label>
-          <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter title..." />
-        </div>
-        
-        <div className="form-control">
-          <label htmlFor="amount"
-            ><h5>Amount</h5> <br />
-            (negative - expense, positive - income)</label
-          >
+          <label htmlFor="type">Type of Transaction</label>
+          <select className="types" value={type} onChange={(e) => setType(e.target.value)}>
+            {types.map(choice => (
+              <option>{choice}</option>
+            ))}
+          </select>
+          <label htmlFor="tags">Tags</label>
+          <select className="tags" value={tags} onChange={(e) => setTags(e.target.value)}>
+            {type === "Donation" && 
+            dropdownChoicesDonor.map(choice => (
+              <option>{choice}</option>
+            ))}
+            {type === "Expenditure" && 
+            dropdownChoicesOrg.map(choice => (
+              <option>{choice}</option>
+            ))}
+          </select>
+          <label htmlFor="amount">
+            Amount <br />
+            <small>(negative for expenditures, positive for donations)</small></label>
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter amount..." />
-        </div>
-        
-        <div className="form-control">
-          <label htmlFor="text"
-          ><h5> Image Link</h5> <br/>
-          Enter url for the image of your receipt, purchase confirmation, etc.
+          <label htmlFor="text">
+            Image Link<br/>
+            <small>Enter url for the image of your receipt, purchase confirmation, etc.</small>
           </label>
-          <input type="text" value={text} onChange={(e) => setImage(e.target.value)} placeholder="Enter image url..." />
+          <input type="text" value={image} onChange={(e) => setImage(e.target.value)} placeholder="Enter image url..." />
+          <button className="btn">Add transaction</button>
         </div>
-        
-        <button className="btn">Add transaction</button>
       </form>
-      {console.log(GlobalContext)}
     </div>
   )
-  
 }
-<div>
-    <p>hi</p>
-      </div>

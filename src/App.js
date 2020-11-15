@@ -2,17 +2,17 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import OrgCard from "./components/OrganizationCard";
-
+// import PieChart from "./components/PieChart";
+import Home from "./components/Homepage";
+import Login from "./components/Login";
 import { Balance } from "./components/Balance";
 import { IncomeExpenses } from "./components/IncomeExpenses";
 import { TransactionList } from "./components/TransactionList";
-import { AddTransaction } from "./components/addTransactions";
+import { AddTransaction } from "./components/AddTransactions";
 import { GlobalProvider } from "./context/GlobalState";
 
 export default function App() {
@@ -22,6 +22,10 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/login">
+            <Navbar />
+            <Login />
+          </Route>
           <Route path="/history">
             <Navbar />
             <GlobalProvider>
@@ -38,13 +42,8 @@ export default function App() {
           </Route>
           <Route path="/">
             <Navbar />
-          {/* <PieChart /> */}
-            <div className="cardRow">
-              <OrgCard orgName="UNICEF" />
-              <OrgCard orgName="WHO" />
-              <OrgCard orgName="St. Jude's" />
-              <OrgCard orgName="HackGuild" />
-            </div>
+            {/* <PieChart /> */}
+            <Home />
           </Route>
         </Switch>
       </div>

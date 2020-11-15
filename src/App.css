@@ -23,11 +23,20 @@ body {
 .cardRow {
   display: flex;
   justify-content: center;
+  margin: 3vh 0;
+  width: 100%;
 }
 
 .container {
   width: 25vw;
   margin: 5vh auto;
+  text-align: center;
+}
+
+.homepage {
+  width: 90vw;
+  margin: 5vh 0;
+  text-align: center;
 }
 
 h1 {
@@ -97,8 +106,16 @@ label {
   margin: 10px 0;
 }
 
-input[type='text'],
-input[type='number'] {
+select, option {
+  font-family: 'Lato', sans-serif;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #dedede;
+}
+
+
+input {
   border: 1px solid #dedede;
   border-radius: 2px;
   display: block;
