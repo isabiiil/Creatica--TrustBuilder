@@ -8,11 +8,11 @@ import {
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import OrgCard from "./components/OrganizationCard";
-import 
+
 import { Balance } from "./components/Balance";
 import { IncomeExpenses } from "./components/IncomeExpenses";
 import { TransactionList } from "./components/TransactionList";
-import { AddTransaction } from "./components/AddTransactions";
+import { AddTransaction } from "./components/addTransactions";
 import { GlobalProvider } from "./context/GlobalState";
 
 export default function App() {
@@ -38,7 +38,7 @@ export default function App() {
           </Route>
           <Route path="/">
             <Navbar />
-            <PieChart />
+          {/* <PieChart /> */}
             <div className="cardRow">
               <OrgCard orgName="UNICEF" />
               <OrgCard orgName="WHO" />
