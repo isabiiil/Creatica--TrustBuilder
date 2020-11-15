@@ -24,21 +24,21 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app
-    .use(express.static(path.join(__dirname, 'public')))
-    .set('views', path.join(__dirname, 'views'))
-    .set('view engine', 'ejs')
-    .get('/', (req, res) => res.send(cool()))
-    .get('/test', (req, res) => res.send({hi: 'there'}))
-    .get('/api/current_user', (req, res) => {
-        console.log(req.user);
-        res.send(req.user)
-        // res.send(req.session);
-    })
-    .get('/api/logout', (req, res) => {
-        req.logout();  // kills cookie ID
-        res.send(req.user);  // should be undefined
-    })
-    .listen(PORT, () => console.log(`Listening on ${PORT}`));
+// .use(express.static(path.join(__dirname, 'public')))
+// .set('views', path.join(__dirname, 'views'))
+// .set('view engine', 'ejs')
+app.get('/', (req, res) => res.send(cool()))
+// .get('/test', (req, res) => res.send({hi: 'there'}))
+app.get('/api/current_user', (req, res) => {
+    console.log(req.user);
+    res.send(req.user)
+    // res.send(req.session);
+})
+app.get('/api/logout', (req, res) => {
+    req.logout();  // kills cookie ID
+    res.send(req.user);  // should be undefined
+})
+
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 require('../routes/authRoutes')(app);
