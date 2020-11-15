@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const cookieSession = require('cookie-session');
 const passport = require('passport')
+const cors = require('cors');
+
 const keys = require('../config/keys')
 
 const cool = require('cool-ascii-faces');
@@ -24,6 +26,13 @@ const data = {
     ]
 }
 
+const whitelist = ["http://localhost:3003/"]
+app.use(cors({
+    origin: (origin, callback) => {
+        // if (whitelist.indexOf(origin) !== -1)
+        callback(null, true)
+    }
+}));
 
 app.use(
     cookieSession({
@@ -34,11 +43,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3003/"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
+
+// cors approach didn't work
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "http://localhost:3003/"); // update to match the domain you will make the request from
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 // .use(express.static(path.join(__dirname, 'public')))
 // .set('views', path.join(__dirname, 'views'))
