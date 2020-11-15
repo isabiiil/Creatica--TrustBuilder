@@ -1,3 +1,7 @@
+# Keys
+config/
+backups/
+
 # Webstorm
 .idea
 
