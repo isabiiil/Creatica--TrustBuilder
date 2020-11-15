@@ -1,5 +1,5 @@
 # Keys
-config/
+config/dev.js
 backups/
 
 # Webstorm
