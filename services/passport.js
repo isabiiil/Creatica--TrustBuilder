@@ -19,7 +19,7 @@ passport.use(
     new GitHubStrategy({
             clientID: keys.githubClientID,
             clientSecret: keys.githubClientSecret,
-            callbackURL: '/auth/github/callback'
+            callbackURL: 'https://creatica.herokuapp.com/auth/github/callback'
         },
         (accessToken, refreshToken, profile, done) => {
             // console.log(accessToken, refreshToken, profile.id)
