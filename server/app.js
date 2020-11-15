@@ -20,9 +20,9 @@ const app = express();
 // dummy data: todo: replace w cockroachdb
 const data = {
     1: [
-        {type: "revenue", amount: 300},
-        {type: "expense", amount: 200},
-        {type: "revenue", amount: 400}
+        {id: 1, text: "revenue", image:null, amount: 300},
+        {id: 2, text: "expense", image:null, amount: 200},
+        {id: 3, text: "revenue", image:null, amount: 400}
     ]
 }
 
