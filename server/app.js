@@ -13,4 +13,5 @@ express()
     .set('view engine', 'ejs')
     // .get('/cool', (req, res) => res.render('pages/index'))
     .get('/', (req, res) => res.send(cool()))
+    .get('/test', (req, res)=> res.send({hi: 'there'}))
     .listen(PORT, () => console.log(`Listening on ${ PORT }`));
