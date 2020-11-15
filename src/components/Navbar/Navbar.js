@@ -4,14 +4,20 @@ import { Link } from "react-router-dom";
 import './Navbar.css';
 
 class Navbar extends Component {
+    state = { clicked: false }
+
+    handleClick = () => {
+        this.setState({clicked: !this.state.clicked})
+    }
+//change group name where it says group name
     render() {
         return(
             <nav className="NavbarItems">
-                <h1 className="navbar-logo">React<i className="fab fa-react"></i></h1>
-                <div className="menu-icon">
-
+                <h1 className="navbar-logo">Group Name<i className="fab fa-react"></i></h1>
+                <div className="menu-icon" onClick={this.handleClick}>
+                    <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
-                <ul>
+                <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
                     {MenuItems.map((item, index)=> {
                         return(
                             <li key={index}>
@@ -22,6 +28,7 @@ class Navbar extends Component {
                         )
                     })}
                 </ul>
+                <Button>Sign Up</Button>
             </nav>
         )
     }
