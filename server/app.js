@@ -1,41 +1,44 @@
 const express = require('express');
 const path = require('path');
-const passport = require('passport');
-const GitHubStrategy = require('passport-github2').Strategy;
+const cookieSession = require('cookie-session');
+const passport = require('passport')
+const keys = require('../config/keys')
 
 const cool = require('cool-ascii-faces');
 
+//const passportConfig = , but since we only need to run it, not access it, omit assignment
+require('../services/passport')
+
+// dynamic port binding (for heroku || dev)
 const PORT = process.env.PORT || 3000;
+const days_to_ms = d => d * 24 * 60 * 60 * 1000;
 
+const app = express();
 
-// Oauth
-const GITHUB_CLIENT_ID = "--insert-github-client-id-here--";
-const GITHUB_CLIENT_SECRET = "--insert-github-client-secret-here--";
+app.use(
+    cookieSession({
+        maxAge: days_to_ms(30),
+        keys: [keys.cookieKey] // is a list because one can use multiple keys (rand select)
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.  However, since this example does not
-//   have a database of user records, the complete GitHub profile is serialized
-//   and deserialized.
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
-
-passport.use(new GitHubStrategy({
-        clientID: GITHUB_CLIENT_ID,
-        clientSecret: GITHUB_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-    },
-    (accessToken, refreshToken, profile, done) =>
-        User.findOrCreate({githubId: profile.id}, (err, user) => done(err, user))
-));
-
-express()
+app
     .use(express.static(path.join(__dirname, 'public')))
     .set('views', path.join(__dirname, 'views'))
     .set('view engine', 'ejs')
-    // .get('/cool', (req, res) => res.render('pages/index'))
     .get('/', (req, res) => res.send(cool()))
     .get('/test', (req, res) => res.send({hi: 'there'}))
+    .get('/api/current_user', (req, res) => {
+        console.log(req.user);
+        res.send(req.user)
+        // res.send(req.session);
+    })
+    .get('/api/logout', (req, res) => {
+        req.logout();  // kills cookie ID
+        res.send(req.user);  // should be undefined
+    })
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+require('../routes/authRoutes')(app);
